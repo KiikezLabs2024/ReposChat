@@ -4,32 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat App</title>
-    <link rel="stylesheet" href="./style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <script>
+        // Verifica si el usuario está logueado; de lo contrario, redirige a login.html
+        if (!localStorage.getItem('username')) {
+            window.location.href = "login.html";
+        }
+    </script>
+
     <div class="container">
         <div class="sidebar">
             <h2>Grupos</h2>
             <div class="create-group">
                 <button onclick="createGroup()">Crear Grupo</button>
             </div>
-            <ul id="group-list">
-            </ul>
+            <ul id="group-list"></ul>
         </div>
         
         <div class="chat">
             <div class="chat-header">
                 <span id="selected-group-name">Selecciona un grupo</span>
             </div>
-            <div class="chat-messages" id="messages">
-            </div>
+            <div class="chat-messages" id="messages"></div>
             <div class="chat-input">
                 <input type="text" id="message-input" placeholder="Escribe un mensaje...">
                 <button onclick="sendMessage()">Enviar</button>
             </div>
         </div>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
