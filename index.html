@@ -4,14 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Chat en GitHub</title>
+    <title>Chat con Login</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
 </head>
 <body>
-    <div class="chat-container">
+    <div class="login-container" id="login-container">
+        <h2>Iniciar Sesión</h2>
+        <input type="email" id="email" placeholder="Correo electrónico">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button id="login-button">Entrar</button>
+        <button id="register-button">Registrar</button>
+    </div>
+
+    <div class="chat-container" id="chat-container" style="display:none;">
         <div class="chat-box" id="chat-box"></div>
         <input type="text" id="message-input" placeholder="Escribe un mensaje...">
         <button id="send-button">Enviar</button>
+        <button id="logout-button">Cerrar Sesión</button>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
