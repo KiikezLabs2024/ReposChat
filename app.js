@@ -3,19 +3,18 @@ let selectedGroup = '';
 const messages = {};
 
 function login() {
-    username = document.getElementById('username').value;
-    if (username) {
-        document.getElementById('login-section').style.display = 'none';
-        document.getElementById('chat-section').style.display = 'block';
-        updateGroupList();
-    }
+    username = prompt("Ingrese su nombre de usuario:");
+    updateGroupList();
 }
 
 function updateGroupList() {
-    const groupSelect = document.getElementById('group-select');
-    groupSelect.innerHTML = `<option value="">Selecciona un grupo</option>`;
+    const groupList = document.getElementById('group-list');
+    groupList.innerHTML = '';
     for (let group in messages) {
-        groupSelect.innerHTML += `<option value="${group}">${group}</option>`;
+        const listItem = document.createElement('li');
+        listItem.textContent = group;
+        listItem.onclick = () => selectGroup(group);
+        groupList.appendChild(listItem);
     }
 }
 
@@ -24,12 +23,12 @@ function createGroup() {
     if (groupName) {
         messages[groupName] = [];
         updateGroupList();
-        alert(`Grupo "${groupName}" creado.`);
     }
 }
 
-function selectGroup() {
-    selectedGroup = document.getElementById('group-select').value;
+function selectGroup(groupName) {
+    selectedGroup = groupName;
+    document.getElementById('selected-group-name').textContent = groupName;
     displayMessages();
 }
 
@@ -38,7 +37,10 @@ function displayMessages() {
     messagesDiv.innerHTML = '';
     if (selectedGroup && messages[selectedGroup]) {
         messages[selectedGroup].forEach(msg => {
-            messagesDiv.innerHTML += `<div><strong>${msg.user}</strong>: ${msg.text}</div>`;
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', msg.user === username ? 'sent' : 'received');
+            messageDiv.innerHTML = `<strong>${msg.user}</strong>: ${msg.text}`;
+            messagesDiv.appendChild(messageDiv);
         });
     }
 }
@@ -51,4 +53,6 @@ function sendMessage() {
         document.getElementById('message-input').value = '';
     }
 }
+
+login();
 
